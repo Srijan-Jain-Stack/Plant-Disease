@@ -18,6 +18,13 @@ if not API_KEY:
 api = CropHealthApi(api_key=API_KEY)
 app = FastAPI()
 
+@app.get("/")
+def read_root():
+    return {
+        "message": "Crop Disease Identification API is running!",
+        "instructions": "Visit /docs to test the `/identify` endpoint by uploading an image."
+    }
+
 @app.post("/identify")
 async def identify_disease(image: UploadFile = File(...)):
     try:
